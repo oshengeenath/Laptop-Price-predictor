@@ -47,8 +47,8 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                 <div class="inputfield">
-                <label for="typename">Typa Name</label>
+                <div class="inputfield">
+                <label for="typename">Type Name</label>
                 <div class="custom_select">
                     <select name="typename" id="typename">
                         <option value="" select hidden>Select</option>
@@ -60,6 +60,33 @@
                         <option value="workstation">Workstation</option>
                     </select>
                 </div>
+                <div class="inputfield">
+                <label for="opsys">Operating System</label>
+                <div class="custom_select">
+                    <select name="opsys" id="opsys">
+                        <option value="" select hidden>Select</option>
+                        <option value="windows">Windows</option>
+                        <option value="mac">Mac</option>
+                        <option value="linux">Linux</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="inputfield">
+                <label for="gpuname">GPU</label>
+                <div class="custom_select">
+                    <select name="gpuname" id="gpuname">
+                        <option value="" select hidden>Select</option>
+                        <option value="intel">Intel</option>
+                        <option value="amd">AMD</option>
+                        <option value="nvidia">Nvidia</option>
+                    </select>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="inputfield">
+                <input type="submit" class="btn" value="Predict Price">
             </div>
         </form>
     </div>

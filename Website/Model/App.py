@@ -17,6 +17,9 @@ def index():
         touchscreen = request.form.getlist("touchscreen")
         ips = request.form.getlist("ips")
 
+        feature_list = []
+        feature_list.append(int())
+
     return render_template('index.HTML')
 
 if __name__ == '__main__':

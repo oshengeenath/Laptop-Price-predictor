@@ -1,8 +1,16 @@
+import pickle
+
 import requests
 from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
+def prediction(lst):
+    filename = "model/predictor.pickle"
+    with open(filename,"rb")as file:
+        model = pickle.load(file)
+    pred_value = model.predict([lst])
+    return pred_value
 
 @app.route('/', methods=["POST","GET"])
 def index():
@@ -18,18 +26,31 @@ def index():
         ips = request.form.getlist("ips")
 
         feature_list = []
-        feature_list.append(int('Ram'))
-        feature_list.append(float('Weight'))
-        feature_list.append(len('Touchscreen'))
-        feature_list.append(len('IPS'))
+        feature_list.append(int(ram))
+        feature_list.append(float(weight))
+        feature_list.append(len(touchscreen))
+        feature_list.append(len(ips))
 
-        company_list = ['Company_Acer', 'Company_Apple','Company_Asus', 'Company_Dell', 'Company_HP', 'Company_Lenovo','Company_MSI', 'Company_Other', 'Company_Toshiba']
-        typename_list = ['TypeName_2 in 1 Convertible', 'TypeName_Gaming', 'TypeName_Netbook','TypeName_Notebook', 'TypeName_Ultrabook', 'TypeName_Workstation']
-        opsys_list = ['OpSys_Linux', 'OpSys_Mac', 'OpSys_Others', 'OpSys_Windows']
-        cpu_list = ['CPU_name_AMD', 'CPU_name_Intel Core i3', 'CPU_name_Intel Core i5','CPU_name_Intel Core i7', 'CPU_name_Others']
-        gpu_list = ['GPU_name_AMD','GPU_name_Intel', 'GPU_name_Nvidia']
+        company_list = ['acer', 'apple','asus', 'dell', 'hp', 'lenovo','msi', 'other', 'toshiba']
+        typename_list = ['2in1convertible', 'gaming', 'netbook','notebook', 'ultrabook', 'workstation']
+        opsys_list = ['linux', 'mac', 'other', 'windows']
+        cpu_list = ['amd', 'intelcorei3', 'intelcorei5','intelcorei7', 'other']
+        gpu_list = ['amd','intel', 'nvidia']
 
+        def traverse_list(lst, value):
+            for item in lst:
+                if item == value:
+                    feature_list.append(1)
+                else:
+                    feature_list.append(0)
 
+        traverse_list(company_list,company)
+        traverse_list(typename_list,typename)
+        traverse_list(opsys_list,opsys)
+        traverse_list(cpu_list,cpu)
+        traverse_list(gpu_list,gpu)
+
+        pred = prediction(feature_list)
 
     return render_template('index.HTML')
 

@@ -1,5 +1,5 @@
 import pickle
-
+import numpy as np
 import requests
 from flask import Flask, render_template,request
 import sklearn
@@ -53,6 +53,7 @@ def index():
         traverse_list(gpu_list,gpu)
 
         pred = prediction(feature_list)*340
+        pred = np.round(pred[0])
 
     return render_template('index.HTML', pred = pred)
 

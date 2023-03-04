@@ -52,7 +52,7 @@ def index():
         traverse_list(cpu_list,cpu)
         traverse_list(gpu_list,gpu)
 
-        pred = prediction(feature_list)
+        pred = prediction(feature_list)*340
 
     return render_template('index.HTML', pred = pred)
 

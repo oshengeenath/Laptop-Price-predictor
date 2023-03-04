@@ -15,6 +15,7 @@ def prediction(lst):
 
 @app.route('/', methods=["POST","GET"])
 def index():
+    pred = 0
     if request.method == "POST":
         ram = request.form["ram"]
         weight = request.form["weight"]
@@ -53,7 +54,7 @@ def index():
 
         pred = prediction(feature_list)
 
-    return render_template('index.HTML')
+    return render_template('index.HTML', pred = pred)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,11 +2,12 @@ import pickle
 
 import requests
 from flask import Flask, render_template,request
+import sklearn
 
 app = Flask(__name__)
 
 def prediction(lst):
-    filename = "model/predictor.pickle"
+    filename = "predictor.pickle"
     with open(filename,"rb")as file:
         model = pickle.load(file)
     pred_value = model.predict([lst])
